@@ -23,6 +23,10 @@
 	-fx-fill: white;	
 }
 
+#sLineVertical{
+	-fx-fill: white;
+}
+
 #MenuButtonWhite{
 	-fx-background-color: transparent;
 	-fx-text-fill: white;
@@ -78,5 +82,58 @@
 #lCreatorName{
 	-fx-text-fill: white;
 	-fx-font-size: 2em;
+	-fx-font-family: "Segoe UI";
+}
+
+#lSend{
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+	-fx-font-size: 2em;
+	-fx-font-family: "Segoe UI";
+}
+
+#lReceive{
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+	-fx-font-size: 2em;
+	-fx-font-family: "Segoe UI";
+}
+
+#lPathToFileSend{
+	-fx-text-fill: white;
+	-fx-font-size: 1.7em;
+	-fx-font-family: "Segoe UI";
+}
+
+#lPathToDirectoryReceive{
+	-fx-text-fill: white;
+	-fx-font-size: 1.7em;
+	-fx-font-family: "Segoe UI";
+}
+
+#bSendFile{
+	-fx-background-color: rgb(6,132,54);
+	-fx-background-radius: 5pt;
+	-fx-text-fill: white;
+	-fx-font-size: 1.7em;
+	-fx-font-weight: bold;
+	-fx-font-family: "Segoe UI";
+}
+
+#bChooseFileToSend{
+	-fx-background-color: rgb(185,120,19);
+	-fx-background-radius: 5pt;
+	-fx-text-fill: white;
+	-fx-font-size: 1.7em;
+	-fx-font-weight: bold;
+	-fx-font-family: "Segoe UI";
+}
+
+#bChooseSavePathReceive{
+	-fx-background-color: rgb(185,120,19);
+	-fx-background-radius: 5pt;
+	-fx-text-fill: white;
+	-fx-font-size: 1.7em;
+	-fx-font-weight: bold;
 	-fx-font-family: "Segoe UI";
 }
