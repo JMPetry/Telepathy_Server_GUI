@@ -1,10 +1,14 @@
 package gui;
 
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class Overview implements SwitchableScene{
@@ -18,12 +22,14 @@ public class Overview implements SwitchableScene{
 		BorderPane root = new BorderPane();
 		root.setId("bpMain");
 		
+		//Contains topbar and navigartionbar
 		VBox vBTopMenu = new VBox();
 		
 		
-		
+		//Contains name of the connected device and an info text
 		VBox vBConnectedDevice = new VBox();
-		
+		vBConnectedDevice.setSpacing(10);
+		vBConnectedDevice.setAlignment(Pos.CENTER);
 		
 		Label lConnectedDeviceInfo = new Label();
 		lConnectedDeviceInfo.setId("lConnectedDeviceInfo");
@@ -33,10 +39,24 @@ public class Overview implements SwitchableScene{
 		lDeviceName.setId("lDeviceName");
 		lDeviceName.setText("BeispielName");
 		
+		//HBox hBDisconnectContainer
+		HBox hBDisconnectContainer = new HBox();
+		hBDisconnectContainer.setAlignment(Pos.CENTER);
+		hBDisconnectContainer.setPadding(new Insets(0,0,35,0));
+		
+		//Disconnect Button
+		Button bDisconnectDevice = new Button();
+		bDisconnectDevice.setId("bDisconnectDevice");
+		bDisconnectDevice.setMinWidth(200);
+		bDisconnectDevice.setText("Trennen");
+		
+		
+		hBDisconnectContainer.getChildren().add(bDisconnectDevice);
 		vBConnectedDevice.getChildren().addAll(lConnectedDeviceInfo, lDeviceName);
 		vBTopMenu.getChildren().addAll(new TopBar(), new NavigationBar());
 		root.setTop(vBTopMenu);
 		root.setCenter(vBConnectedDevice);
+		root.setBottom(hBDisconnectContainer);
 		
 		//Make undecorated window dragable
 		root.setOnMousePressed(new EventHandler<MouseEvent>() {

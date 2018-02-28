@@ -38,3 +38,26 @@
 	-fx-font-size: 1.7em;
 	-fx-font-family: "Segoe UI";
 }
+
+#lConnectedDeviceInfo{
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+	-fx-font-size: 2.6em;
+	-fx-font-family: "Segoe UI";
+}
+
+#lDeviceName{
+	-fx-text-fill: white;
+	-fx-font-style: italic;
+	-fx-font-size: 2.6em;
+	-fx-font-family: "Segoe UI";
+}
+
+#bDisconnectDevice{
+	-fx-background-radius: 5pt;
+	-fx-background-color: rgb(150,24,17);
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+	-fx-font-size: 2em;
+	-fx-font-family: "Segoe UI";
+}
