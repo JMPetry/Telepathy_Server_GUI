@@ -1,0 +1,5 @@
+package gui;
+
+public enum SceneNames {
+	START_WINDOW, OVERVIEW, SEND_RECEIVE_FILE, OPEN_URL, START_PROGRAM, MAKROS, INFORMATION;
+}

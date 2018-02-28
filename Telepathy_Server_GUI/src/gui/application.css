@@ -1,0 +1,40 @@
+
+#bpMain{
+	-fx-background-color: rgb(58,58,58);
+}
+
+#hbWindowOperations{
+	-fx-background-color: rgb(185,120,19);
+}
+
+#lConnect{
+	-fx-text-fill: white;	
+}
+
+#circleConnect{
+	-fx-fill: rgb(6,132,54);
+}
+
+#lInfoForCode{
+	-fx-text-fill: white;
+}
+
+#sLineHorizontal{
+	-fx-fill: white;	
+}
+
+#MenuButtonWhite{
+	-fx-background-color: transparent;
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+	-fx-font-size: 1.7em;
+	-fx-font-family: "Segoe UI";
+}
+
+#MenuButtonGrey{
+	-fx-background-color: transparent;
+	-fx-text-fill: grey;
+	-fx-font-weight: bold;
+	-fx-font-size: 1.7em;
+	-fx-font-family: "Segoe UI";
+}
