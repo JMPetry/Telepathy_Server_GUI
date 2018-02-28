@@ -61,3 +61,22 @@
 	-fx-font-size: 2em;
 	-fx-font-family: "Segoe UI";
 }
+
+#InfoFirstValue{
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+	-fx-font-size: 2em;
+	-fx-font-family: "Segoe UI";
+}
+
+#lVersionNumber{
+	-fx-text-fill: white;
+	-fx-font-size: 2em;
+	-fx-font-family: "Segoe UI";
+}
+
+#lCreatorName{
+	-fx-text-fill: white;
+	-fx-font-size: 2em;
+	-fx-font-family: "Segoe UI";
+}
