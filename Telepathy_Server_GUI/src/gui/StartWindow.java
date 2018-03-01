@@ -42,8 +42,6 @@ public class StartWindow extends Application implements SwitchableScene{
 			BorderPane root = new BorderPane();
 			root.setId("bpMain");
 			
-			scene = new Scene(root,WindowSettings.WINDOW_WIDTH,WindowSettings.WINDOW_HEIGHT);
-	
 			//StackPane in BorderPane body which holds the circle and the Label on top of it
 			StackPane spConnect = new StackPane();
 			
@@ -127,6 +125,7 @@ public class StartWindow extends Application implements SwitchableScene{
 			
 			SceneManager.getInstance(primaryStage, scene);
 			
+			scene = new Scene(root,WindowSettings.WINDOW_WIDTH,WindowSettings.WINDOW_HEIGHT);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.initStyle(StageStyle.UNDECORATED);

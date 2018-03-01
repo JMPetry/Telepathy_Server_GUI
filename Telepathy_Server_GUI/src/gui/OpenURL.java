@@ -23,7 +23,6 @@ public class OpenURL implements SwitchableScene {
 		
 		
 		
-		scene = new Scene(root, WindowSettings.WINDOW_WIDTH, WindowSettings.WINDOW_HEIGHT);
 		
 		vBTopMenu.getChildren().addAll(new TopBar(), new NavigationBar());
 		root.setTop(vBTopMenu);
@@ -45,6 +44,7 @@ public class OpenURL implements SwitchableScene {
 			}
 		});
 
+		scene = new Scene(root, WindowSettings.WINDOW_WIDTH, WindowSettings.WINDOW_HEIGHT);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 	}
 

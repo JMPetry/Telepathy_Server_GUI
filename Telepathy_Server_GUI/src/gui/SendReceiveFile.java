@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -22,6 +23,8 @@ import javafx.stage.FileChooser;
  */
 public class SendReceiveFile implements SwitchableScene {
 
+	private static final double SPACE_TITLE_CHOOSE = 10.0;
+	
 	private double xOffset = 0;
 	private double yOffset = 0;
 	private Scene scene;
@@ -37,21 +40,18 @@ public class SendReceiveFile implements SwitchableScene {
 		HBox hBContent = new HBox();
 		hBContent.setSpacing(10);
 		hBContent.setPadding(new Insets(10));
-		//hBContent.setAlignment(Pos.CENTER);
 		
 		//Left side, sending to mobile device
 		VBox vBSend = new VBox();
 		vBSend.setSpacing(20);
-		vBSend.setAlignment(Pos.TOP_LEFT);
+		vBSend.setMinWidth((WindowSettings.WINDOW_WIDTH/2.0)-50);
 		
 		Label lSend = new Label();
 		lSend.setId("lSend");
 		lSend.setText("Datei senden");
 		
 		//path and choose button next to each other
-		HBox hBChooseFile = new HBox();
-		hBChooseFile.setSpacing(20);
-		hBChooseFile.setPadding(new Insets(30,0,0,0));
+		AnchorPane aPChooseFile = new AnchorPane();
 		
 		Label lPathToFileSend = new Label();
 		lPathToFileSend.setId("lPathToFileSend");
@@ -61,6 +61,9 @@ public class SendReceiveFile implements SwitchableScene {
 		Button bChooseFileToSend = new Button();
 		bChooseFileToSend.setId("bChooseFileToSend");
 		bChooseFileToSend.setText("Datei auswählen");
+		
+		HBox hBSendFileContainer = new HBox();
+		hBSendFileContainer.setAlignment(Pos.CENTER);
 		
 		Button bSendFile = new Button();
 		bSendFile.setId("bSendFile");
@@ -74,16 +77,13 @@ public class SendReceiveFile implements SwitchableScene {
 		//Right side, receiving files from device
 		VBox vBReceive = new VBox();
 		vBReceive.setSpacing(20);
-		//vBReceive.setStyle("-fx-background-color: red;");
-		vBReceive.setMinWidth(500);
+		vBReceive.setMinWidth(WindowSettings.WINDOW_WIDTH/2.0);
 		
 		Label lReceive = new Label();
 		lReceive.setId("lReceive");
 		lReceive.setText("Datei empfangen");
 		
-		HBox hBChooseDirectory = new HBox();
-		hBChooseDirectory.setSpacing(20);
-		hBChooseDirectory.setPadding(new Insets(30,0,0,0));
+		AnchorPane aPChooseDirectory = new AnchorPane();
 		
 		Label lPathToDirectoryReceive = new Label();
 		lPathToDirectoryReceive.setId("lPathToDirectoryReceive");
@@ -92,13 +92,20 @@ public class SendReceiveFile implements SwitchableScene {
 		
 		Button bChooseSavePathReceive = new Button();
 		bChooseSavePathReceive.setId("bChooseSavePathReceive");
-		bChooseSavePathReceive.setText("Ordner auswählen");	
+		bChooseSavePathReceive.setText("Ordner auswählen");
 		
+		AnchorPane.setRightAnchor(bChooseSavePathReceive, 0.0);
+		AnchorPane.setTopAnchor(bChooseSavePathReceive, SPACE_TITLE_CHOOSE);
+		AnchorPane.setRightAnchor(bChooseFileToSend, 0.0);
+		AnchorPane.setTopAnchor(bChooseFileToSend, SPACE_TITLE_CHOOSE);
+		AnchorPane.setTopAnchor(lPathToFileSend, SPACE_TITLE_CHOOSE);
+		AnchorPane.setTopAnchor(lPathToDirectoryReceive, SPACE_TITLE_CHOOSE);
 		
-		hBChooseDirectory.getChildren().addAll(lPathToDirectoryReceive, bChooseSavePathReceive);
-		vBReceive.getChildren().addAll(lReceive, hBChooseDirectory);
-		hBChooseFile.getChildren().addAll(lPathToFileSend, bChooseFileToSend);
-		vBSend.getChildren().addAll(lSend, hBChooseFile, bSendFile);
+		aPChooseDirectory.getChildren().addAll(lPathToDirectoryReceive, bChooseSavePathReceive);
+		vBReceive.getChildren().addAll(lReceive, aPChooseDirectory);
+		aPChooseFile.getChildren().addAll(lPathToFileSend, bChooseFileToSend);
+		hBSendFileContainer.getChildren().add(bSendFile);
+		vBSend.getChildren().addAll(lSend, aPChooseFile, hBSendFileContainer);
 		hBContent.getChildren().addAll(vBSend, sVLSeparateSendReceive, vBReceive);
 		vBTopMenu.getChildren().addAll(new TopBar(), new NavigationBar());
 		root.setTop(vBTopMenu);
