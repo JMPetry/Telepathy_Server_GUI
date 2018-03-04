@@ -1,14 +1,15 @@
 package gui;
 	
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -20,6 +21,8 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import model.Management;
+import model.QRCodeGenerator;
 
 /**
  * Window which is shown up when the application is started
@@ -56,7 +59,7 @@ public class StartWindow extends Application implements SwitchableScene{
 			
 			Label lInfoForCode = new Label();
 			lInfoForCode.setId("lInfoForCode");
-			lInfoForCode.setText("Bitte folgenden Code auf dem Handy eingeben:");
+			lInfoForCode.setText("Bitte folgenden QR-Code auf dem Handy einscannen:");
 			lInfoForCode.setFont(Font.font(FONT_NAME, FontWeight.BOLD, FONT_SIZE_LABEL_CONNECT));
 			lInfoForCode.setVisible(false);
 			
@@ -76,6 +79,10 @@ public class StartWindow extends Application implements SwitchableScene{
 			lConnect.setFont(Font.font(FONT_NAME, FontWeight.BOLD, FONT_SIZE_LABEL_CONNECT));
 			lConnect.setMouseTransparent(true);
 			
+			ImageView iVQRCode = new ImageView(QRCodeGenerator.generateQRCode(Management.getInstance().getQRCodeString(), 350, 350));
+			iVQRCode.setPreserveRatio(true);
+			iVQRCode.setVisible(false);
+			iVQRCode.setFitWidth(350);
 			
 			sPCircle.getChildren().addAll(circleConnect,lConnect);
 			vBContent.getChildren().addAll(lInfoForCode, sPCircle);
@@ -86,24 +93,16 @@ public class StartWindow extends Application implements SwitchableScene{
 			//Switch to next scene
 			circleConnect.setOnMouseClicked(e ->{
 				
-				final Timeline tmSPCircleYTranslation = new Timeline();
-				final KeyValue kvYTranslate = new KeyValue(sPCircle.translateYProperty(), 30);
-				final KeyFrame kfYTranslate = new KeyFrame(Duration.millis(250), kvYTranslate);
-				tmSPCircleYTranslation.getKeyFrames().add(kfYTranslate);
-				tmSPCircleYTranslation.play();
-				
+				vBContent.getChildren().remove(sPCircle);
+				vBContent.getChildren().add(iVQRCode);
 				lInfoForCode.setVisible(true);
+				iVQRCode.setVisible(true);
 				
+				FadeTransition fadeQRCodeIn = new FadeTransition(Duration.millis(2000), iVQRCode);
+		        fadeQRCodeIn.setFromValue(0.0f);
+		        fadeQRCodeIn.setToValue(1.0f);
+		        fadeQRCodeIn.play();
 				
-				final Timeline tmCircleConnectColor = new Timeline();
-				final KeyValue kvColorCirlce = new KeyValue(circleConnect.fillProperty(), Color.rgb(148, 163, 35));
-				final KeyFrame kfColorCircle = new KeyFrame(Duration.millis(250), kvColorCirlce);
-				tmCircleConnectColor.getKeyFrames().add(kfColorCircle);
-				tmCircleConnectColor.play();
-				
-				System.out.println("click");
-				
-				SceneManager.getInstance().switchScene(SceneNames.OVERVIEW);
 			});
 			
 			//Make undecorated window dragable
@@ -120,6 +119,17 @@ public class StartWindow extends Application implements SwitchableScene{
 				public void handle(MouseEvent event) {
 					primaryStage.setX(event.getScreenX() - xOffset);
 	                primaryStage.setY(event.getScreenY() - yOffset);
+				}
+			});
+			
+			Management.getInstance().getAuthorizedProperty().addListener(new ChangeListener<Boolean>(){
+				
+				@Override
+				public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+					
+					if(newValue){
+						SceneManager.getInstance().switchScene(SceneNames.OVERVIEW);
+					}
 				}
 			});
 			
@@ -140,7 +150,7 @@ public class StartWindow extends Application implements SwitchableScene{
 	public static void main(String[] args) {
 		launch(args);
 	}
-
+	
 	@Override
 	public Scene getScene() {
 		return scene;
