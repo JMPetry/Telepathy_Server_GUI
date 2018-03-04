@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import model.Management;
 
 public class Overview implements SwitchableScene{
 	
@@ -58,6 +59,10 @@ public class Overview implements SwitchableScene{
 		root.setCenter(vBConnectedDevice);
 		root.setBottom(hBDisconnectContainer);
 		
+		bDisconnectDevice.setOnMouseClicked(e ->{
+			System.out.println("Disconnect");
+		});
+		
 		//Make undecorated window dragable
 		root.setOnMousePressed(new EventHandler<MouseEvent>() {
 			@Override
@@ -74,6 +79,8 @@ public class Overview implements SwitchableScene{
                 SceneManager.getInstance().getPrimaryStage().setY(event.getScreenY() - yOffset);
 			}
 		});
+		
+		lDeviceName.textProperty().bind(Management.getInstance().getPhoneNameProperty());
 		
 		scene = new Scene(root,WindowSettings.WINDOW_WIDTH, WindowSettings.WINDOW_HEIGHT);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

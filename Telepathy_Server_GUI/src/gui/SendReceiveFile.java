@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import model.Management;
 
 /**
  *Scene which shows the sending and receiving perspective of files
@@ -123,7 +124,7 @@ public class SendReceiveFile implements SwitchableScene {
 		
 		
 		bSendFile.setOnMouseClicked(e -> {
-			System.out.println("Sending file");
+			System.out.println("TODO: Sending file");
 		});
 		
 		
@@ -133,6 +134,7 @@ public class SendReceiveFile implements SwitchableScene {
 			
 			if(selectedDirectory != null){
             	lPathToDirectoryReceive.setText(selectedDirectory.getAbsolutePath());
+            	Management.getInstance().setFilePathSendReceiveFile(selectedDirectory.getAbsolutePath());
             }
 			
 		});
