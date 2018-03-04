@@ -41,6 +41,7 @@ public class StartWindow extends Application implements SwitchableScene{
 	public void start(Stage primaryStage) {
 		try {
 			
+			Management.getInstance().run();
 			
 			BorderPane root = new BorderPane();
 			root.setId("bpMain");

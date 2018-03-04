@@ -50,4 +50,8 @@ public class Management {
 	public void setFilePathSendReceiveFile(String filePath){
 		s.getSendFileHandler().setFilePath(filePath);
 	}
+	
+	public void closeHttpServer(){
+		s.closeHttpServer();
+	}
 }

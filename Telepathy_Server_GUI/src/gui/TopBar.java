@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import model.Management;
 
 /**
  * HBox which holds the minimize and the X buttons to close or minimize the window
@@ -41,6 +42,7 @@ public class TopBar extends HBox{
 		//Close window
 		iVCloseWindow.setOnMouseClicked(e ->{
 			SceneManager.getInstance().getPrimaryStage().close();
+			Management.getInstance().closeHttpServer();
 		});
 		
 	}

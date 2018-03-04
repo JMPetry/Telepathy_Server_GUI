@@ -17,6 +17,7 @@ public class Server {
 	private int port;
 	private static final Logger log = Logger.getLogger(Server.class.getName());
 	private SendFileHandler sfh = new SendFileHandler();
+	private HttpServer server;
 
 	private Server(int port) {
 		this.port = port;
@@ -38,7 +39,7 @@ public class Server {
 	public void startHttpServer(){
 		
 		try{
-			HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
+			server = HttpServer.create(new InetSocketAddress(port), 0);
 			server.createContext(HTTPRoutes.OPENURL.toString(), new OpenURLHandler());
 			server.createContext(HTTPRoutes.SEND_FILE.toString(), sfh);
 			server.createContext(HTTPRoutes.START.toString(), new AuthorizeStartHandler());
@@ -54,6 +55,10 @@ public class Server {
 	
 	public SendFileHandler getSendFileHandler(){
 		return sfh;
+	}
+	
+	public void closeHttpServer(){
+		server.stop(0);
 	}
 
 }
