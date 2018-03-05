@@ -48,7 +48,7 @@ public class Management {
 		Platform.runLater(() -> sPPhoneName.set(phoneName));
 	}
 	
-	public void setFilePathSendReceiveFile(String filePath){
+	public void setDirectoryPathReceiveFile(String filePath){
 		s.getSendFileHandler().setFilePath(filePath);
 	}
 	

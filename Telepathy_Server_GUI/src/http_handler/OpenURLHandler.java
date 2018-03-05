@@ -25,6 +25,7 @@ public class OpenURLHandler implements HttpHandler {
 		
 		int secNum = -1;
 		String response = "fail";
+		String urlToOpen = "";
 		
 		try{
 			if(htex.getRequestHeaders().get(HttpPropertyNames.SEC_NUM.toString()) != null){
@@ -34,9 +35,11 @@ public class OpenURLHandler implements HttpHandler {
 			e.printStackTrace();
 		}
 		
-		if (secNum == SecureNumberGenerator.getSNum()) {
-			
-			String urlToOpen = htex.getRequestURI().toString().replaceAll("/openTab/", "");
+		if(htex.getRequestHeaders().containsKey(HttpPropertyNames.URL_TO_OPEN.toString())){
+			urlToOpen = htex.getRequestHeaders().get(HttpPropertyNames.URL_TO_OPEN.toString()).get(0);
+		}
+		
+		if (secNum == SecureNumberGenerator.getSNum() && !urlToOpen.equals("")) {
 			
 			//tell the browser to open url with http -> youtu.be wouldnt work otherwise, TODO support more than just http
 			if(!urlToOpen.startsWith("http://") && !urlToOpen.startsWith("https://")){

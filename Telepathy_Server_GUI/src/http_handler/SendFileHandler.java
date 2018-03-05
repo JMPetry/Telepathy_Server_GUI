@@ -21,7 +21,7 @@ public class SendFileHandler implements HttpHandler {
 
 	private static final String FILE_NAME_IN_HEADER = "Filename";
 	private static final Logger LOG = Logger.getLogger(SendFileHandler.class.getName());
-	private String filePath = "C:\\Users\\Jean\\Desktop\\teleTest\\";
+	private String filePath = System.getProperty("user.home") + "/Desktop";
 	private int statusCode = HttpURLConnection.HTTP_INTERNAL_ERROR;
 
 	@Override

@@ -56,7 +56,7 @@ public class SendReceiveFile implements SwitchableScene {
 		
 		Label lPathToFileSend = new Label();
 		lPathToFileSend.setId("lPathToFileSend");
-		lPathToFileSend.setText("C:/default");
+		lPathToFileSend.setText("Pfad auswählen");
 		lPathToFileSend.setMaxWidth(400);
 		
 		Button bChooseFileToSend = new Button();
@@ -88,12 +88,12 @@ public class SendReceiveFile implements SwitchableScene {
 		
 		Label lPathToDirectoryReceive = new Label();
 		lPathToDirectoryReceive.setId("lPathToDirectoryReceive");
-		lPathToDirectoryReceive.setText("C:/default");
+		lPathToDirectoryReceive.setText("Ordner auswählen");
 		lPathToDirectoryReceive.setMaxWidth(400);
 		
 		Button bChooseSavePathReceive = new Button();
 		bChooseSavePathReceive.setId("bChooseSavePathReceive");
-		bChooseSavePathReceive.setText("Ordner auswählen");
+		bChooseSavePathReceive.setText(System.getProperty("user.home") + "/Desktop");
 		
 		AnchorPane.setRightAnchor(bChooseSavePathReceive, 0.0);
 		AnchorPane.setTopAnchor(bChooseSavePathReceive, SPACE_TITLE_CHOOSE);
@@ -122,7 +122,6 @@ public class SendReceiveFile implements SwitchableScene {
 			}
 		});
 		
-		
 		bSendFile.setOnMouseClicked(e -> {
 			System.out.println("TODO: Sending file");
 		});
@@ -134,7 +133,7 @@ public class SendReceiveFile implements SwitchableScene {
 			
 			if(selectedDirectory != null){
             	lPathToDirectoryReceive.setText(selectedDirectory.getAbsolutePath());
-            	Management.getInstance().setFilePathSendReceiveFile(selectedDirectory.getAbsolutePath());
+            	Management.getInstance().setDirectoryPathReceiveFile(selectedDirectory.getAbsolutePath());
             }
 			
 		});
