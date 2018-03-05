@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
+import model.HttpPropertyNames;
 import model.SecureNumberGenerator;
 
 public class OpenURLHandler implements HttpHandler {
@@ -26,8 +27,8 @@ public class OpenURLHandler implements HttpHandler {
 		String response = "fail";
 		
 		try{
-			if(htex.getRequestHeaders().get("secNum") != null){
-				secNum = Integer.parseInt(htex.getRequestHeaders().get("secNum").get(0));
+			if(htex.getRequestHeaders().get(HttpPropertyNames.SEC_NUM.toString()) != null){
+				secNum = Integer.parseInt(htex.getRequestHeaders().get(HttpPropertyNames.SEC_NUM.toString()).get(0));
 			}
 		}catch(NumberFormatException e){
 			e.printStackTrace();
@@ -62,7 +63,7 @@ public class OpenURLHandler implements HttpHandler {
 			
 		}else{
 			statusCode = HttpURLConnection.HTTP_FORBIDDEN;
-			LOG.log(Level.INFO, htex.getRemoteAddress() + " tried to open an URL but send the wrong secure number");
+			LOG.log(Level.WARNING, htex.getRemoteAddress() + " tried to open an URL but send the wrong secure number");
 		}
 
 		htex.sendResponseHeaders(statusCode, response.getBytes().length);

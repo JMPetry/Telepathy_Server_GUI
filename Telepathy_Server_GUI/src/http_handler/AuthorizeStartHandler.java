@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
+import model.HttpPropertyNames;
 import model.Management;
 import model.SecureNumberGenerator;
 
@@ -25,18 +26,16 @@ public class AuthorizeStartHandler implements HttpHandler {
 		String phoneName = "Mobile Device";
 
 		try {
-			secNum = Integer.parseInt(htex.getRequestHeaders().get("secNum").get(0));
+			secNum = Integer.parseInt(htex.getRequestHeaders().get(HttpPropertyNames.SEC_NUM.toString()).get(0));
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
 		
 		//send phonename
-		if(htex.getRequestHeaders().get("phoneName") != null){
-			phoneName = htex.getResponseHeaders().get("phoneName").get(0);
+		if(htex.getRequestHeaders().get(HttpPropertyNames.PHONE_NAME.toString()) != null){
+			phoneName = htex.getRequestHeaders().get(HttpPropertyNames.PHONE_NAME.toString()).get(0);
+			Management.getInstance().setPhoneName(phoneName);
 		}
-		
-		System.out.println(phoneName);
-		System.out.println(secNum);
 
 		if (secNum == SecureNumberGenerator.getSNum()) {
 			
@@ -46,7 +45,7 @@ public class AuthorizeStartHandler implements HttpHandler {
 			response = "success";
 			statusCode = HttpURLConnection.HTTP_OK;
 		} else {
-			LOG.log(Level.INFO, htex.getRemoteAddress().toString() + " tried to log on with wrong security number");
+			LOG.log(Level.WARNING, htex.getRemoteAddress().toString() + " tried to log on with wrong security number");
 		}
 
 		htex.sendResponseHeaders(statusCode, response.getBytes().length);

@@ -1,5 +1,6 @@
 package model;
 
+import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -36,7 +37,7 @@ public class Management {
 	}
 	
 	public void setAuthorized(boolean isAuthorized){
-		bPAuthorized.set(isAuthorized);
+		Platform.runLater(() -> bPAuthorized.set(isAuthorized));
 	}
 	
 	public StringProperty getPhoneNameProperty(){
@@ -44,7 +45,7 @@ public class Management {
 	}
 	
 	public void setPhoneName(String phoneName){
-		sPPhoneName.set(phoneName);
+		Platform.runLater(() -> sPPhoneName.set(phoneName));
 	}
 	
 	public void setFilePathSendReceiveFile(String filePath){
