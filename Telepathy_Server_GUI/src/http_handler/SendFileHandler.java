@@ -19,7 +19,6 @@ import model.SecureNumberGenerator;
 
 public class SendFileHandler implements HttpHandler {
 
-	private static final String FILE_NAME_IN_HEADER = "Filename";
 	private static final Logger LOG = Logger.getLogger(SendFileHandler.class.getName());
 	private String filePath = System.getProperty("user.home") + "/Desktop";
 	private int statusCode = HttpURLConnection.HTTP_INTERNAL_ERROR;
@@ -38,11 +37,15 @@ public class SendFileHandler implements HttpHandler {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
-
-		if (secNum == SecureNumberGenerator.getSNum()) {
+		
+		if(htex.getRequestHeaders().containsKey(HttpPropertyNames.FILE_NAME.toString())){
+			fileName = htex.getRequestHeaders().get(HttpPropertyNames.FILE_NAME.toString()).get(0);
+		}
+		
+		if (secNum == SecureNumberGenerator.getSNum() && !fileName.equals("")) {
 			
 			try {
-				List<String> fileNameFromReqHeader = htex.getRequestHeaders().get(FILE_NAME_IN_HEADER);
+				List<String> fileNameFromReqHeader = htex.getRequestHeaders().get(HttpPropertyNames.FILE_NAME.toString());
 				fileName = fileNameFromReqHeader.get(0);
 
 				InputStream in = new BufferedInputStream(htex.getRequestBody());
@@ -56,11 +59,10 @@ public class SendFileHandler implements HttpHandler {
 
 				response = "success";
 				statusCode = HttpURLConnection.HTTP_OK;
-				LOG.log(Level.INFO, "Successfully received file " + FILE_NAME_IN_HEADER);
+				LOG.log(Level.INFO, "Successfully received file " + fileName);
 
 			} catch (NullPointerException e) {
-				LOG.log(Level.SEVERE, "Message doesnt contain " + FILE_NAME_IN_HEADER + " while trying to send file!",
-						e);
+				LOG.log(Level.SEVERE, "Message doesnt contain " + HttpPropertyNames.FILE_NAME.toString() + " while trying to send file!", e);
 				e.printStackTrace();
 			} catch (IOException i) {
 				LOG.log(Level.SEVERE, "Couldnt write File!", i);

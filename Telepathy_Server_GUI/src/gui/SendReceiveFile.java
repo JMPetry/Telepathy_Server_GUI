@@ -88,12 +88,12 @@ public class SendReceiveFile implements SwitchableScene {
 		
 		Label lPathToDirectoryReceive = new Label();
 		lPathToDirectoryReceive.setId("lPathToDirectoryReceive");
-		lPathToDirectoryReceive.setText("Ordner auswählen");
+		lPathToDirectoryReceive.setText(System.getProperty("user.home") + "\\Desktop");
 		lPathToDirectoryReceive.setMaxWidth(400);
 		
 		Button bChooseSavePathReceive = new Button();
 		bChooseSavePathReceive.setId("bChooseSavePathReceive");
-		bChooseSavePathReceive.setText(System.getProperty("user.home") + "/Desktop");
+		bChooseSavePathReceive.setText("Ordner auswählen");
 		
 		AnchorPane.setRightAnchor(bChooseSavePathReceive, 0.0);
 		AnchorPane.setTopAnchor(bChooseSavePathReceive, SPACE_TITLE_CHOOSE);

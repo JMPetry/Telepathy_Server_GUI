@@ -1,7 +1,7 @@
 package model;
 
 public enum HttpPropertyNames {
-	SEC_NUM("secNum"), PHONE_NAME("phoneName"), URL_TO_OPEN("urlToOpen");
+	SEC_NUM("secNum"), PHONE_NAME("phoneName"), URL_TO_OPEN("urlToOpen"), FILE_NAME("fileName");
 	
 	private final String value;
 
