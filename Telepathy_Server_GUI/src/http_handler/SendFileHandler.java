@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,14 +44,12 @@ public class SendFileHandler implements HttpHandler {
 		if (secNum == SecureNumberGenerator.getSNum() && !fileName.equals("")) {
 			
 			try {
-				List<String> fileNameFromReqHeader = htex.getRequestHeaders().get(HttpPropertyNames.FILE_NAME.toString());
-				fileName = fileNameFromReqHeader.get(0);
 
 				InputStream in = new BufferedInputStream(htex.getRequestBody());
 
-				File targetFile = new File(filePath + fileName);
+				File targetFile = new File(filePath + "\\" + fileName);
 				outStream = new FileOutputStream(targetFile);
-
+				
 				while ((bufferedByte = in.read()) != -1) {
 					outStream.write(bufferedByte);
 				}
