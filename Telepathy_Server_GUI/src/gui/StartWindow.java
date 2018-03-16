@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -141,6 +142,7 @@ public class StartWindow extends Application implements SwitchableScene{
 			primaryStage.setScene(scene);
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.setTitle("Telepathy");
+			primaryStage.getIcons().add(new Image("iconTelepathy.png"));
 			primaryStage.show();
 			
 		} catch(Exception e) {
