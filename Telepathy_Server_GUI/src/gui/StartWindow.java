@@ -142,7 +142,7 @@ public class StartWindow extends Application implements SwitchableScene{
 			primaryStage.setScene(scene);
 			primaryStage.initStyle(StageStyle.UNDECORATED);
 			primaryStage.setTitle("Telepathy");
-			primaryStage.getIcons().add(new Image("iconTelepathy.png"));
+			primaryStage.getIcons().add(new Image("file:images/iconTelepathy.png"));
 			primaryStage.show();
 			
 		} catch(Exception e) {

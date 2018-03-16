@@ -19,12 +19,12 @@ public class TopBar extends HBox{
 		
 		setId("hbWindowOperations");
 		
-		ImageView iVMinimize = new ImageView(new Image("minimize.png"));
+		ImageView iVMinimize = new ImageView(new Image("file:images/minimize.png"));
 		iVMinimize.setPreserveRatio(true);
 		iVMinimize.setPickOnBounds(true);
 		iVMinimize.setFitWidth(WINDOW_BUTTONS_SIZE);
 		
-		ImageView iVCloseWindow = new ImageView(new Image("close.png"));
+		ImageView iVCloseWindow = new ImageView(new Image("file:images/close.png"));
 		iVCloseWindow.setPreserveRatio(true);
 		iVCloseWindow.setPickOnBounds(true);
 		iVCloseWindow.setFitWidth(WINDOW_BUTTONS_SIZE);
