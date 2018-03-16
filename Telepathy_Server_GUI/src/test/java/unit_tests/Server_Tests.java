@@ -1,5 +1,6 @@
 package unit_tests;
 
+
 import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedWriter;
@@ -71,7 +72,6 @@ public class Server_Tests {
 
 		Management.getInstance().run();
 		secNum = SecureNumberGenerator.getSNum();
-		System.out.println(secNum);
 
 		props.put(HttpPropertyNames.SEC_NUM.toString(), String.valueOf(secNum));
 		props.put(HttpPropertyNames.URL_TO_OPEN.toString(), "www.google.com");
@@ -82,29 +82,6 @@ public class Server_Tests {
 
 		Management.getInstance().resetManager();
 	}
-
-	// @Test(expected=WrongSecureNumberException.class)
-	// public void testOpenUrlWrongSecureNumber(){
-	//
-	// GetRequestSenderTest grst = new GetRequestSenderTest();
-	// HashMap<String,String> props = new HashMap<String,String>();
-	// String result = null;
-	// int secNum = -1;
-	//
-	// Management.getInstance().run();
-	//
-	// props.put(HttpPropertyNames.SEC_NUM.toString(), String.valueOf(secNum));
-	// props.put(HttpPropertyNames.URL_TO_OPEN.toString(), "www.google.com");
-	//
-	// result = grst.sendGetRequestForResponse(HTTPRoutes.OPENURL.toString(),
-	// props);
-	//
-	// assertTrue((grst.getResponseCode() ==
-	// HttpURLConnection.HTTP_UNAUTHORIZED) && (result.equals("fail")));
-	//
-	// Management.getInstance().closeHttpServer();
-	//
-	// }
 
 	@Test
 	public void testSendFile() throws UnsupportedEncodingException, FileNotFoundException, IOException, NoSuchAlgorithmException {
