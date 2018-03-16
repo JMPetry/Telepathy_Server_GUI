@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * Enum of the routes of http requests
+ * @author Jean
+ */
 public enum HTTPRoutes {
 	OPENURL("/openTab"), START("/start"), SEND_FILE("/sendFile");
 	

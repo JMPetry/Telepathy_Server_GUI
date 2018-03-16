@@ -10,10 +10,18 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * The IPManager gets the IP of the local computer and formats it to a IP with the correct port
+ * @author Jean
+ */
 public class IPManager {
 
 	private static Logger LOG = Logger.getLogger(IPManager.class.getName());
-
+	
+	/**
+	 * Appends the port to the IP address of the local computer. This IP is used to send requests to later
+	 * @return String of the IP and port to send requests to
+	 */
 	public static String getIPWithPortAsString() {
 
 		String ipWithPort = getOwnIpAddress().toString();
@@ -25,7 +33,11 @@ public class IPManager {
 		
 		return ipWithPort;
 	}
-
+	
+	/**
+	 * Tries to get the local IP and ignores IPs of VMs by looking at the MAC addresses of them
+	 * @return InetAddress of the computer in the local network
+	 */
 	public static InetAddress getOwnIpAddress() {
 
 		final String[] COMMON_VM_MAC_ADDRESSES = { "00-50-56", "00-0C-29", "00-05-69", "00-03-FF", "00-1C-42",
@@ -56,7 +68,12 @@ public class IPManager {
 
 		return ipAddr;
 	}
-
+	
+	/**
+	 * Converts a byteArrayToString
+	 * @param barr byte array which shall be converted
+	 * @return String which contains the content of the byte array
+	 */
 	private static String byteArrayToString(byte[] barr) {
 		String s = "";
 

@@ -15,6 +15,10 @@ import com.sun.net.httpserver.HttpHandler;
 import model.HttpPropertyNames;
 import model.SecureNumberGenerator;
 
+/**
+ * OpenURLHandler manages the request for opening an URL on the local machine
+ * @author Jean
+ */
 public class OpenURLHandler implements HttpHandler {
 	
 	private static final Logger LOG = Logger.getLogger(OpenURLHandler.class.getName());
@@ -39,6 +43,7 @@ public class OpenURLHandler implements HttpHandler {
 			urlToOpen = htex.getRequestHeaders().get(HttpPropertyNames.URL_TO_OPEN.toString()).get(0);
 		}
 		
+		//check secure number
 		if (secNum == SecureNumberGenerator.getSNum() && !urlToOpen.equals("")) {
 			
 			//tell the browser to open url with http -> youtu.be wouldnt work otherwise, TODO support more than just http
@@ -65,7 +70,7 @@ public class OpenURLHandler implements HttpHandler {
 			}
 			
 		}else{
-			statusCode = HttpURLConnection.HTTP_FORBIDDEN;
+			statusCode = HttpURLConnection.HTTP_UNAUTHORIZED;
 			LOG.log(Level.WARNING, htex.getRemoteAddress() + " tried to open an URL but send the wrong secure number");
 		}
 

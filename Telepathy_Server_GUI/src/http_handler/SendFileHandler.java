@@ -16,6 +16,10 @@ import com.sun.net.httpserver.HttpHandler;
 import model.HttpPropertyNames;
 import model.SecureNumberGenerator;
 
+/**
+ * SendFileHanler manages receiving files from a mobile device, saving it to the local machine
+ * @author Jean
+ */
 public class SendFileHandler implements HttpHandler {
 
 	private static final Logger LOG = Logger.getLogger(SendFileHandler.class.getName());
@@ -37,6 +41,7 @@ public class SendFileHandler implements HttpHandler {
 			e.printStackTrace();
 		}
 		
+		//getting the file name out of the request properties
 		if(htex.getRequestHeaders().containsKey(HttpPropertyNames.FILE_NAME.toString())){
 			fileName = htex.getRequestHeaders().get(HttpPropertyNames.FILE_NAME.toString()).get(0);
 		}
@@ -73,7 +78,7 @@ public class SendFileHandler implements HttpHandler {
 			}
 			
 		}else{
-			statusCode = HttpURLConnection.HTTP_FORBIDDEN;
+			statusCode = HttpURLConnection.HTTP_UNAUTHORIZED;
 			LOG.log(Level.WARNING, htex.getRemoteAddress() + " tried to open an URL but send the wrong secure number");
 		}
 
@@ -83,7 +88,11 @@ public class SendFileHandler implements HttpHandler {
 		os.close();
 
 	}
-
+	
+	/**
+	 * Setting the Directory path where the file should be saved to
+	 * @param filePath String path where the received file should be saved
+	 */
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}

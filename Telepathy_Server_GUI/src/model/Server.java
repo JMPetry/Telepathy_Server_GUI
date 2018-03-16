@@ -11,6 +11,10 @@ import http_handler.AuthorizeStartHandler;
 import http_handler.OpenURLHandler;
 import http_handler.SendFileHandler;
 
+/**
+ * A simple HTTP server which manages to receive HTTP requests and respond to them
+ * @author Jean
+ */
 public class Server {
 
 	private static Server s;
@@ -22,7 +26,12 @@ public class Server {
 	private Server(int port) {
 		this.port = port;
 	}
-
+	
+	/**
+	 * Singleton structure
+	 * @param port int port on which the server is running
+	 * @return instance of the server
+	 */
 	public static Server getInstance(int port) {
 
 		if (s == null) {
@@ -35,7 +44,10 @@ public class Server {
 	public static Server getInstance() {
 		return s;
 	}
-
+	
+	/**
+	 * Starts the HTTP server and creates HTTP handler for the specific routes
+	 */
 	public void startHttpServer(){
 		
 		try{
@@ -53,12 +65,20 @@ public class Server {
 		
 	}
 	
+	/**
+	 * Gets the SendFileHandler which is a HTTP handler
+	 * @return SendFileHandler HTTP handler for receiving files
+	 */
 	public SendFileHandler getSendFileHandler(){
 		return sfh;
 	}
 	
+	/**
+	 * Closes the HTTP server
+	 */
 	public void closeHttpServer(){
 		server.stop(0);
+		log.log(Level.INFO, "Server was successfully closed!");
 	}
 
 }
